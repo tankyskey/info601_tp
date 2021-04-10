@@ -7,6 +7,7 @@ public class Test {
     public static final Error invalid_err = new Error("invalid querry accepted");
     public static Error error;
 
+    /*
     public static void runTest() {
         System.out.println("\n============\nvalid Query: ");
         if( !validQuery() ) {
@@ -23,26 +24,27 @@ public class Test {
 
     public static boolean validQuery() {
         return (
-            Cypher.query("CREATE (n:Type)") &&
-            Cypher.query("CREATE (n: Type)") &&
-            Cypher.query("CREATE (n : Type)") &&
-            Cypher.query("CREATE (n :Type)") &&
-            Cypher.query("CREATE (:Type)") &&
-            Cypher.query("CREATE (n:Type {key: value})") &&
-            Cypher.query("CREATE (n: Type {key : value})") &&
-            Cypher.query("CREATE (n : Type {key:value})") &&
-            Cypher.query("CREATE (n :Type {key :value})") &&
-            Cypher.query("CREATE (:Type {key:value})")
+            (Boolean)Cypher.query("CREATE (n:Type)") &&
+            (Boolean)Cypher.query("CREATE (n: Type)") &&
+            (Boolean)Cypher.query("CREATE (n : Type)") &&
+            (Boolean)Cypher.query("CREATE (n :Type)") &&
+            (Boolean)Cypher.query("CREATE (:Type)") &&
+            (Boolean)Cypher.query("CREATE (n:Type {key: value})") &&
+            (Boolean)Cypher.query("CREATE (n: Type {key : value})") &&
+            (Boolean)Cypher.query("CREATE (n : Type {key:value})") &&
+            (Boolean)Cypher.query("CREATE (n :Type {key :value})") &&
+            (Boolean)Cypher.query("CREATE (:Type {key:value})")
         );
     }
 
     public static boolean invalidQuery() {
         return (
-            Cypher.query("Test") ||
-            Cypher.query("CREATE") ||
-            Cypher.query("CREATE (n)") ||
-            Cypher.query("CREATE (:)") ||
-            Cypher.query("CREATE (n:")
+            (Boolean)Cypher.query("Test") ||
+            (Boolean)Cypher.query("CREATE") ||
+            (Boolean)Cypher.query("CREATE (n)") ||
+            (Boolean)Cypher.query("CREATE (:)") ||
+            (Boolean)Cypher.query("CREATE (n:")
         );
     }
+    */
 }

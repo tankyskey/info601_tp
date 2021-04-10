@@ -5,6 +5,22 @@ import graphe.*;
 public class BusNet {
     public static void main(String args[]) {
         // Class
+        String[] queries = {
+            "CREATE (:Transport)",
+            "CREATE (:Bus)",
+            "CREATE (:Ligne)",
+            "CREATE (:Arret)"
+        };
+
+        for( String q: queries){
+            try {
+                Cypher.query(q);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
+
+        /*
         Node transport = Node.create("Transport"),
              bus = Node.create("Bus"),
              ligne = Node.create("Ligne"),
@@ -39,5 +55,10 @@ public class BusNet {
         a.link(halles, "Contient", Link.ATOB);
         d.link(halles, "Contient", Link.ATOB);
         d.link(merrande, "Contient", Link.ATOB);
+        */
+
+        for( Node e: Node.getNodesInstances() )
+            System.out.println(e.getLinked());
+        
     }
 }

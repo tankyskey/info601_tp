@@ -43,7 +43,7 @@ public class Element {
         return properties;
     }
 
-    public static ArrayList<Element> getIntances(){
+    public static ArrayList<Element> getInstances(){
         return instances;
     }
 }
