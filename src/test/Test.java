@@ -23,26 +23,26 @@ public class Test {
 
     public static boolean validQuery() {
         return (
-            Element.query("CREATE (n:Type)") &&
-            Element.query("CREATE (n: Type)") &&
-            Element.query("CREATE (n : Type)") &&
-            Element.query("CREATE (n :Type)") &&
-            Element.query("CREATE (:Type)") &&
-            Element.query("CREATE (n:Type {key: value})") &&
-            Element.query("CREATE (n: Type {key : value})") &&
-            Element.query("CREATE (n : Type {key:value})") &&
-            Element.query("CREATE (n :Type {key :value})") &&
-            Element.query("CREATE (:Type {key:value})")
+            Cypher.query("CREATE (n:Type)") &&
+            Cypher.query("CREATE (n: Type)") &&
+            Cypher.query("CREATE (n : Type)") &&
+            Cypher.query("CREATE (n :Type)") &&
+            Cypher.query("CREATE (:Type)") &&
+            Cypher.query("CREATE (n:Type {key: value})") &&
+            Cypher.query("CREATE (n: Type {key : value})") &&
+            Cypher.query("CREATE (n : Type {key:value})") &&
+            Cypher.query("CREATE (n :Type {key :value})") &&
+            Cypher.query("CREATE (:Type {key:value})")
         );
     }
 
     public static boolean invalidQuery() {
         return (
-            Element.query("Test") ||
-            Element.query("CREATE") ||
-            Element.query("CREATE (n)") ||
-            Element.query("CREATE (:)") ||
-            Element.query("CREATE (n:")
+            Cypher.query("Test") ||
+            Cypher.query("CREATE") ||
+            Cypher.query("CREATE (n)") ||
+            Cypher.query("CREATE (:)") ||
+            Cypher.query("CREATE (n:")
         );
     }
 }

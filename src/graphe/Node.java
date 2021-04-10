@@ -1,6 +1,8 @@
 package graphe;
 
+import java.lang.annotation.Retention;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Node extends Element {
     private static ArrayList<Node> instances = new ArrayList<Node>();
@@ -62,5 +64,17 @@ public class Node extends Element {
         if( this.getLabel() != b.getLabel() ) return false;
 
         return true;
+    }
+
+    public String toString() {
+        String res = "(:"+getLabel()+" {";
+
+        Set<String> keys = getPorperties().keySet();
+        for( String key: keys ){
+            res += key +": "+getProperty(key)+", ";
+        }
+        res = res.replaceAll(", $", "}")+")";
+
+        return res;
     }
 }
