@@ -22,17 +22,19 @@ public class Element {
     }
 
     public static boolean query(String q) {
-        String reg_instruction = "(CREATE|MATCH)"; 
-        String reg_valideName  = "([A-Za-z]+[0-9]*)";
-        String reg_key         = reg_valideName;
-        String reg_value       = "\".*\"";
-        String reg_node        = reg_valideName; // (N...)
-        String reg_label       = "(: *"+reg_valideName+")"; // (...:TYPE...)
-        String reg_property    = "( *"+reg_key+" *: *"+reg_value+" *)";
-        String reg_properties  = "(\\{ *"+reg_property+" *\\})"; // (...{key: value}...)
+        String reg_instruction = "(CREATE|MATCH|RETURN|DELETE|DETACH)",
+               reg_valideName  = "([A-Za-z]+[0-9]*)",
+               reg_key         = reg_valideName,
+               reg_value       = reg_valideName,
+               reg_node        = reg_valideName,                      // (N...)
+               reg_label       = "(: *"+reg_valideName+")",           // (...:TYPE...)
+               reg_property    = "("+reg_key+" *: *("+reg_value+"))", // key: value
+               reg_properties  = "(\\{ *"+reg_property+"* *\\})";     // {key: value, key: value, ..., key: value}
 
-        String reg_create=" *\\("+reg_node+"? *"+reg_label+" *"+reg_properties+"* *\\)";
-        String reg_match =" *\\("+reg_node+"? *"+reg_label+"? *"+reg_properties+"* *\\)";
+               // CREATE (n:Type {key: val})
+        String reg_create=" *\\("+reg_node+"? *"+reg_label+" *"+reg_properties+"* *\\)",
+               // MATCH (n:Type {key: val})
+               reg_match =" *\\("+reg_node+"? *"+reg_label+"? *"+reg_properties+"* *\\)";
 
         Pattern pattern = Pattern.compile("^ *"+reg_instruction, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(q);
