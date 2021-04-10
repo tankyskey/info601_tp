@@ -38,17 +38,25 @@ public class Cypher {
                         if(matcher.group(i) != null)
                             System.out.println(""+i+": "+matcher.group(i));
 
-                    String label_1Node = matcher.group(5),
+                    String varName_Node1 = matcher.group(3),
+                           label_1Node = matcher.group(5),
                            properties_1Node = matcher.group(6),
+
+                           linkVarName = matcher.group(18),
                            leftLink = matcher.group(16),
                            rightLink = matcher.group(30),
                            linkLabel = matcher.group(20),
+
+                           varName_Node2 = matcher.group(32),
                            label_2Node = matcher.group(34),
                            properties_2Node = matcher.group(35),
 
+                           linkVarName2 = matcher.group(47),
                            leftLink2 = matcher.group(45),
                            rightLink2 = matcher.group(59),
                            linkLabel2 = matcher.group(49),
+
+                           varName_Node3 = matcher.group(61),
                            label_3Node = matcher.group(63),
                            properties_3Node = matcher.group(64);
 

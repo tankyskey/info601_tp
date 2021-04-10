@@ -12,8 +12,8 @@ public class Main {
         // if( a.equals(b) ) System.out.println("YES");
 
         try {
-            Cypher.query("CREATE (n:Type)-[:Test]-(:T2), (:T3), (:Bus)-[:Rel]->(a:Arret)<-[:Rel]-(n:Bus2)");
-            //Cypher.query("CREATE (:a)<-[:Rel]-(:b)");
+            //Cypher.query("CREATE (n:Type)-[:Test]-(:T2), (:T3), (:Bus)-[:Rel]->(a:Arret)<-[:Rel]-(n:Bus2)");
+            Cypher.query("CREATE (n:a)<-[r:Rel]-(o:b)-[r2:Rel]->(p:c)");
         } catch (Exception e) {
             System.err.println(e);
         }

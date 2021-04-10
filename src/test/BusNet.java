@@ -6,9 +6,9 @@ public class BusNet {
     public static void main(String args[]) {
         // Class
         String[] queries = {
-            "CREATE (:Transport)",
-            "CREATE (:Bus)",
-            "CREATE (:Ligne)",
+            "CREATE (:Bus)-[:Herite]->(:Transport)",
+            "CREATE ()-[:Herite]->(:Bus)",
+            "CREATE ()-[:Herite]->(:Ligne)",
             "CREATE (:Arret)"
         };
 
