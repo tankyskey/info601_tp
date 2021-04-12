@@ -1,17 +1,20 @@
 package main;
 
 import graphe.*;
-//import test.Test;
+import test.*;
 import view.MainView;
 
 public class Main {
     public static void main(String[] args) {
-        // Test.runTest();
 
-        // Node a = new Node("test");
-        // Node b = new Node("test");
-        // if( a.equals(b) ) System.out.println("YES");
+		if( args.length == 0)
+			BusNet.main(args);
 
+		else if( args[0].equals("fx") )
+			new MainView(500, 500);
+    }
+
+	public static void cypher() {
         try {
             //Cypher.query("CREATE (n:Type)-[:Test]-(:T2), (:T3), (:Bus)-[:Rel]->(a:Arret)<-[:Rel]-(n:Bus2)");
             //Cypher.query("CREATE (n:a)<-[r:Rel]-(o:b)-[r2:Rel]->(p:c)");
@@ -23,18 +26,6 @@ public class Main {
 
         for( Node n: Node.getNodesInstances() )
             System.out.println( n.getLinked() );
-        
-        Node a = new Node("A"),
-             b = new Node("B"),
-             c = new Node("C"),
-             d = new Node("D"),
-             e = new Node("E"),
-             f = new Node("F");
-
-        a.Dlink(b, "herite");
-
-        System.out.println("=========");
-        new MainView(500, 500);
-    }
+	}
 
 }

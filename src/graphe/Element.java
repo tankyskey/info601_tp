@@ -11,6 +11,7 @@ public class Element {
     private HashMap<String, String> properties = new HashMap<String, String>();
     private int id;
 
+	// ====== CSTR ======
     public Element(String label) {
         this.label = label;
         this.id = nbInstances;
@@ -19,14 +20,12 @@ public class Element {
         nbInstances++;
     }
 
+	// ====== SETR ======
     public void setLabel(String label) {
         this.label = label;
     }
 
-    public void addProperty(String key, String value) {
-        this.properties.put(key, value);
-    }
-
+	// ====== GETR ======
     public int getId() {
         return id;
     }
@@ -46,4 +45,10 @@ public class Element {
     public static ArrayList<Element> getInstances(){
         return instances;
     }
+
+	// ====== METH ======
+    public void addProperty(String key, String value) {
+        this.properties.put(key, value);
+    }
+
 }

@@ -1,10 +1,3 @@
-/*
- * EL OUALI
- * TAFANEL
- *
- * liste de couleur
- */
-
 package view;
 
 import java.awt.Color;

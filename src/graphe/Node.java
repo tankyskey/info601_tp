@@ -9,6 +9,7 @@ public class Node extends Element {
     private static ArrayList<Node> instances = new ArrayList<Node>();
     private ArrayList<Link> links = new ArrayList<Link>();
 
+	// ====== CSTR =====
     public Node(String label) {
         super(label);
 
@@ -32,9 +33,112 @@ public class Node extends Element {
         }
     }
 
+	// ====== SETR =====
+
+	// ====== GETR =====
+    public static ArrayList<Node> getNodesInstances() {
+        return instances;
+    }
+
+    public String getLinked() {
+        String res = this.toString();
+
+        for(Link ln: links){
+            int sens = ln.getSens();
+            Node b = ln.getB();
+
+            if(this != b) {
+                if( sens == Link.BTOA ) res += "<-";
+                else res += "-";
+
+                res += ln.toString();
+
+                if( sens == Link.ATOB ) res += "->";
+                else res += "-";
+            } else {
+                if( sens == Link.ATOB ) res += "<-";
+                else res += "-";
+
+                res += ln.toString();
+
+                if( sens == Link.BTOA ) res += "->";
+                else res += "-";
+            }
+
+            res += ln.getNext(this).toString()+"\n\t";
+        }
+
+        return res;
+    }
+
+    public Link getLinkToNode(Node b) {
+        for( Link ln: links )
+            if( ln.getNext(this).equals(b) )
+                return ln;
+        return null;
+    }
+
+    public ArrayList<Link> getLink() {
+        return this.links;
+    }
+
+    public ArrayList<Node> getPreds() {
+		ArrayList<Node> nodes = new ArrayList<Node>();
+
+        for(Link ln: links){
+			Node a = ln.getA();
+			if( a != this) {
+				nodes.add( a );
+			}
+        }
+
+        return nodes;
+    }
+
+    public ArrayList<Node> getPreds(String lbl) {
+		ArrayList<Node> nodes = new ArrayList<Node>();
+
+        for(Link ln: links){
+			Node a = ln.getA();
+			if( a != this && ln.getLabel().equals(lbl) ) {
+				nodes.add( a );
+			}
+        }
+
+        return nodes;
+    }
+
+    public ArrayList<Node> getNexts() {
+		ArrayList<Node> nodes = new ArrayList<Node>();
+
+        for(Link ln: links){
+			Node b = ln.getB();
+			if( b != this) {
+				nodes.add( b );
+			}
+        }
+
+        return nodes;
+    }
+
+	public ArrayList<Node> getNexts(String lbl) {
+		ArrayList<Node> nodes = new ArrayList<Node>();
+
+        for(Link ln: links){
+			Node b = ln.getB();
+			if( b != this && ln.getLabel().equals(lbl) ) {
+				nodes.add( b );
+			}
+        }
+
+        return nodes;
+	}
+
+	// ====== METH =====
     public static Node create(String label, String properties) {
         return new Node(label, properties);
     }
+
     public static Node create(String label) {
         return new Node(label);
     }
@@ -56,10 +160,6 @@ public class Node extends Element {
 
     public void Blink(Node b, String label) {
         link(b, label, Link.BTOA);
-    }
-
-    public static ArrayList<Node> getNodesInstances() {
-        return instances;
     }
 
     public static ArrayList<Element> findNodesByLabel(String label) {
@@ -116,44 +216,6 @@ public class Node extends Element {
         return res+")";
     }
 
-    public String getLinked() {
-        String res = this.toString();
-
-        for(Link ln: links){
-            int sens = ln.getSens();
-            Node b = ln.getB();
-
-            if(this != b) {
-                if( sens == Link.BTOA ) res += "<-";
-                else res += "-";
-
-                res += ln.toString();
-
-                if( sens == Link.ATOB ) res += "->";
-                else res += "-";
-            } else {
-                if( sens == Link.ATOB ) res += "<-";
-                else res += "-";
-
-                res += ln.toString();
-
-                if( sens == Link.BTOA ) res += "->";
-                else res += "-";
-            }
-
-            res += ln.getNext(this).toString()+"\n\t";
-        }
-
-        return res;
-    }
-
-    public Link getLinkToNode(Node b) {
-        for( Link ln: links )
-            if( ln.getNext(this).equals(b) )
-                return ln;
-        return null;
-    }
-
     public void parcourtEnProfondeur(ArrayList<Node> parcourut) {
         if( !parcourut.contains(this) ) {
             parcourut.add(this);
@@ -208,22 +270,5 @@ public class Node extends Element {
         return false;
     }
 
-    public Node[] cross(Node b) {
-        // renvoyer tous les noeuds intermediaire permettant de faire la liason entre this et b
-        // TODO
-        ArrayList<Node> nodes = new ArrayList<Node>();
-
-        for(Link ln: links) {
-            if( ln.getSens() != Link.BTOA ) {
-
-            }
-        }
-
-        Node[] res = new Node[nodes.size()];
-        return nodes.toArray(res);
-    }
-
-    public ArrayList<Link> getLink() {
-        return this.links;
-    }
 }
+
