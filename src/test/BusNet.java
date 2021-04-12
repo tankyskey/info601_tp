@@ -59,10 +59,6 @@ public class BusNet {
         //printAllNodes();
         //printNodesLinkedToBy("Halles", "Contient");
 
-        Node[] arr = getNodesLinkedToBy("Halles", "Contient");
-        for(Node n: arr)
-            System.out.println(n);
-
         menu();
     }
 
