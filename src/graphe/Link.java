@@ -69,4 +69,12 @@ public class Link extends Element {
     public int getSens() {
         return sens;
     }
+
+    public boolean contains(Node a) {
+        return getA().equals(a) || getB().equals(a);
+    }
+
+    public boolean isLinking(Node a, Node b) {
+        return this.contains(a) && this.contains(b);
+    }
 }
