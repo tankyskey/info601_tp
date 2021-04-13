@@ -17,20 +17,20 @@ public class Node extends Element {
     }
 
     public Node(String label, String properties) {
-        this(label);
-        if( properties != null && properties.length() > 0) {
-            String[] paires = properties.subSequence(1, properties.length()-1)
-                            .toString()
-                            .replace(" ", "")
-                            .split(",");
+		this(label);
+		if( properties != null && properties.length() > 0) {
+			String[] paires = properties.subSequence(1, properties.length()-1)
+				.toString()
+				.replace(" ", "")
+				.split(",");
 
-            for( String paire: paires) {
-                String key = paire.split(":")[0],
-                    val = paire.split(":")[1];
+			for( String paire: paires) {
+				String key = paire.split(":")[0],
+					   val = paire.split(":")[1];
 
-                this.addProperty(key, val);
-            }
-        }
+				this.addProperty(key, val);
+			}
+		}
     }
 
 	// ====== SETR =====
@@ -271,4 +271,5 @@ public class Node extends Element {
     }
 
 }
+
 

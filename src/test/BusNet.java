@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 import graphe.*;
 
+		// quel ligne croise la ligne courante
+		// horaire des bus
+
 public class BusNet {
 
     public static void main(String args[]) {
@@ -48,7 +51,10 @@ public class BusNet {
 			// pour chaque ligne,
 			for( Node stops: l.getNexts("Contient") ) 
 				// si la destination est contenu, l'ajoute et retourne true
-				if( goAtoB( stops, dst, ligneTaken ) ) return true;
+				if( goAtoB( stops, dst, ligneTaken ) ) {
+					System.out.println(stops+"->"+l);
+					return true;
+				}
 
 			// la ligne ne mene pas a la destination, on la supprime du parcourt
 			ligneTaken.remove( l );
@@ -171,7 +177,7 @@ public class BusNet {
 		// Correspondance
         System.out.println("enter starting stop: ");
         String lbl = input.next();
-        System.out.println("enter destition: ");
+        System.out.println("enter destination: ");
         String lbl_dst = input.next();
 
 		try {
@@ -195,9 +201,5 @@ public class BusNet {
 		}
 	}
 }
-
-
-
-
 
 

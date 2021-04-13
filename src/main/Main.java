@@ -10,8 +10,10 @@ public class Main {
 		if( args.length == 0)
 			BusNet.main(args);
 
-		else if( args[0].equals("fx") )
+		else if( args[0].equals("fx") ) {
+			BusNet.init();
 			new MainView(500, 500);
+		}
     }
 
 	public static void cypher() {

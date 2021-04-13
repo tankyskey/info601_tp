@@ -51,4 +51,8 @@ public class Element {
         this.properties.put(key, value);
     }
 
+	public boolean hasProperty( String key ) {
+		return properties.containsKey( key );
+	}
+
 }

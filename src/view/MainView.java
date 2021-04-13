@@ -117,6 +117,7 @@ public class MainView extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				for( Element elt: Element.getInstances() ) {
 					System.out.println(elt);
+					drawMap.repaint();
 				}
 			}
 		});
