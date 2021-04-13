@@ -148,8 +148,8 @@ public class MainView extends JFrame{
 		c4.add(b3);
 
 		c1.add(drawMap, BorderLayout.CENTER);
-		c1.add(c2, BorderLayout.EAST);
-		c2.add(c4);
+		//c1.add(c2, BorderLayout.EAST);
+		//c2.add(c4);
 		this.add(c1);
 		this.setSize(LARGEUR, HAUTEUR);
 	}

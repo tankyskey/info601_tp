@@ -47,8 +47,9 @@ public class Element {
     }
 
 	// ====== METH ======
-    public void addProperty(String key, String value) {
+    public Element addProperty(String key, String value) {
         this.properties.put(key, value);
+		return this;
     }
 
 	public boolean hasProperty( String key ) {

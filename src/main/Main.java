@@ -1,20 +1,23 @@
 package main;
 
+import java.lang.Thread;
+
 import graphe.*;
 import test.*;
 import view.MainView;
 
-public class Main {
+public class Main extends Thread {
     public static void main(String[] args) {
 
-		if( args.length == 0)
-			BusNet.main(args);
-
-		else if( args[0].equals("fx") ) {
-			BusNet.init();
-			new MainView(500, 500);
-		}
+		BusNet busNet = new BusNet();
+		Main main = new Main();
+		busNet.start();
+		main.start();
     }
+
+	public void run() {
+		new MainView(500, 500);
+	}
 
 	public static void cypher() {
         try {

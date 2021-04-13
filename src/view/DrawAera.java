@@ -54,21 +54,23 @@ public class DrawAera extends Canvas implements Observer {
 	}
 
 	public void init() {
-		for( Node n: nodes ) {
-			// x = lenght * sin( a )
-			// y = lenght * cos( a )
-			int x = (int)(Math.random()*(double)(475 - radius ) + 25),
-				y = (int)(Math.random()*(double)(500 - radius ) + 25);
+		int x = 10, y = 500;
+		double a = 0, length = 100;
 
-			n.addProperty("x", String.valueOf(x) );
-			n.addProperty("y", String.valueOf(y) );
+		for( Node n: nodes ) {
+			if( !n.hasProperty("x") ) {
+				n.addProperty("x", String.valueOf(x) );
+				n.addProperty("y", String.valueOf(y) );
+			} else {
+				x = Integer.parseInt( n.getProperty("x") );
+				y = Integer.parseInt( n.getProperty("y") );
+			}
 
 			circles.add(new Ellipse2D.Double(x, y, radius, radius) );
 			for( Link ln: n.getLink() ) {
 				Node nxt = ln.getNext(n);
 
 				if( nxt.hasProperty("x") ) {
-					System.out.println( nxt );
 					int halfRad = radius/2;
 					lines.add(new Line2D.Double(x+halfRad, y+halfRad,
 												Integer.parseInt( nxt.getProperty("x") ) + halfRad,
@@ -76,7 +78,12 @@ public class DrawAera extends Canvas implements Observer {
 												));
 				}
 			}
+
+			a = 360/( (double)n.getLink().size() );
+			x += (int)(length * Math.sin( a ));
+			y += (int)(length * Math.cos( a ));
 		}
 
 	}
 }
+

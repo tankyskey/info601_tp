@@ -2,13 +2,14 @@ package test;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.lang.Thread;
 
 import graphe.*;
 
 		// quel ligne croise la ligne courante
 		// horaire des bus
 
-public class BusNet {
+public class BusNet extends Thread {
 
     public static void main(String args[]) {
         init();
@@ -43,21 +44,23 @@ public class BusNet {
 			if( ligneTaken.contains(l) ) continue;
 
 			// marque la ligne comme visite
+			ligneTaken.add( dep );
 			ligneTaken.add( l );
 
 			// si la ligne contient l'arret, arrete tout
 			if( l.isLinkedToBy(dst, "Contient") ) return true;
 
-			// pour chaque ligne,
-			for( Node stops: l.getNexts("Contient") ) 
+			// sinon pour chaque ligne,
+			for( Node stops: l.getNexts("Contient") ) {
 				// si la destination est contenu, l'ajoute et retourne true
 				if( goAtoB( stops, dst, ligneTaken ) ) {
-					System.out.println(stops+"->"+l);
 					return true;
 				}
+			}
 
 			// la ligne ne mene pas a la destination, on la supprime du parcourt
 			ligneTaken.remove( l );
+			ligneTaken.remove( dep );
 		}
 
 		// l'arret dep ne mene pas la destination
@@ -66,23 +69,23 @@ public class BusNet {
 
     public static void init() {
 		// Class
-		Node transport = Node.create("Transport"),
-			 bus = Node.create("Bus"),
-			 ligne = Node.create("Ligne"),
-			 arret = Node.create("Arret");
+		Node transport = (Node)Node.create("Transport").addProperty("x", "20").addProperty("y", "20"),
+			 bus = (Node)Node.create("Bus").addProperty("x", "20").addProperty("y", "120"),
+			 ligne = (Node)Node.create("Ligne").addProperty("x", "120").addProperty("y", "120"),
+			 arret = (Node)Node.create("Arret").addProperty("x", "450").addProperty("y", "200");
 
 		// Instances
-		Node b1 = Node.create("B1"),
-			 b2 = Node.create("B2"),
-			 a = Node.create("A"),
-			 d = Node.create("D"),
-			 b = Node.create("B"),
-			 c = Node.create("C"),
-			 bourget = Node.create("Bourget"),
-			 halles = Node.create("Halles"),
-			 merrande = Node.create("Merrande"),
-			 plaine = Node.create("Plaine"),
-			 therme = Node.create("Therme");
+		Node b1 = (Node)Node.create("B1").addProperty("x", "50").addProperty("y", "220"),
+			 b2 = (Node)Node.create("B2").addProperty("x", "50").addProperty("y", "300"),
+			 a = (Node)Node.create("A").addProperty("x", "230").addProperty("y", "60"),
+			 d = (Node)Node.create("D").addProperty("x", "230").addProperty("y", "120"),
+			 b = (Node)Node.create("B").addProperty("x", "230").addProperty("y", "180"),
+			 c = (Node)Node.create("C").addProperty("x", "230").addProperty("y", "240"),
+			 bourget = (Node)Node.create("Bourget").addProperty("x", "340").addProperty("y", "60"),
+			 halles = (Node)Node.create("Halles").addProperty("x", "340").addProperty("y", "120"),
+			 merrande = (Node)Node.create("Merrande").addProperty("x", "340").addProperty("y", "180"),
+			 plaine = (Node)Node.create("Plaine").addProperty("x", "340").addProperty("y", "240"),
+			 therme = (Node)Node.create("Therme").addProperty("x", "340").addProperty("y", "300");
 
 		// Inheritance
 		bus.link(transport, "Herite", Link.ATOB);
@@ -199,6 +202,14 @@ public class BusNet {
 		} catch (Exception e) {
 			System.out.println( "Les arrets entré n'ont pas été trouvé" );
 		}
+	}
+
+	public BusNet() {
+	}
+
+	public void run() {
+		init();
+		menu();
 	}
 }
 
