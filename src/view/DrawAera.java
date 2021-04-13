@@ -35,6 +35,8 @@ public class DrawAera extends Canvas implements Observer {
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setStroke(new BasicStroke(3));
 
+		g2.clearRect(0, 0, 500, 500);
+
 		g2.setColor( Palette.green );
 		for( Shape l: lines )
 			g2.draw( l );
@@ -53,10 +55,24 @@ public class DrawAera extends Canvas implements Observer {
 		g2.setColor( Palette.yellow );
 		for( Node n: nodes )
 			g2.drawString( n.getLabel(), Integer.parseInt(n.getProperty("x")), Integer.parseInt(n.getProperty("y"))+radius/2 );
+
+		for( Link n: links ) {
+			int x = Integer.parseInt(n.getA().getProperty("x")),
+				y = Integer.parseInt(n.getA().getProperty("y"));
+			int z = Integer.parseInt(n.getB().getProperty("x")),
+				w = Integer.parseInt(n.getB().getProperty("y"));
+
+			g2.drawString( n.getLabel(), (x+z)/2, (y+w)/2 );
+		}
+		//circles.clear();
 	}
 
 	public void update(Observable obs, Object obj){
 		updates++;
+		Node n = (Node)obs;
+		//int x = Integer.parseInt( n.getProperty( "x" ) );
+		//int y = Integer.parseInt( n.getProperty( "y" ) );
+		//circles.add( new Ellipse2D.Double(x, y, radius, radius) );
 		this.repaint();
 	}
 

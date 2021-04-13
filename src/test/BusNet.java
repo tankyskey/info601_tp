@@ -136,6 +136,8 @@ public class BusNet extends Thread {
             System.out.println("3. get all nodes comming from 'a'");
             System.out.println("4. deepth parcourt from 'a'");
             System.out.println("5. go to bus stop 'a' to bus stop 'b'");
+            System.out.println("6. get node 'n'");
+            System.out.println("7. create a new node");
             System.out.println("9. exit");
 
             choix = input.nextInt();
@@ -144,7 +146,9 @@ public class BusNet extends Thread {
                 case 2: subMenu2(input); break; // DONE
                 case 3: subMenu3(input); break; // DONE
                 case 4: subMenu4(input); break; // DONE
-                case 5: subMenu5(input); break;
+                case 5: subMenu5(input); break; // DONE
+                case 6: subMenu6(input); break; // DONE
+                case 7: subMenu7(input); break; // DONE
             }
 
 			System.out.println("===============");
@@ -216,6 +220,55 @@ public class BusNet extends Thread {
 		}
 	}
 
+	public static void subMenu6(Scanner input) {
+        System.out.println("enter node: ");
+        String lbl = input.next();
+
+		try{
+			Node n = (Node) Node.findNodesByLabel(lbl).get(0);
+			System.out.println(n);
+		} catch (Exception e) {
+			System.out.println("noeud introuvable");
+		}
+	}
+
+	public static void subMenu7(Scanner input) {
+        System.out.println("enter label: ");
+        String lbl = input.next();
+		Node n = new Node(lbl);
+
+		String choix;
+		do {
+			System.out.println("add a property or a link ? [y/l/n]");
+			choix = input.next();
+
+			if( choix.equals("y") ) {
+				System.out.println("key: ");
+				String key = input.next();
+
+				System.out.println("value: ");
+				String value = input.next();
+
+				n.addProperty(key, value);
+			} else if ( choix.equals("l") ) {
+				System.out.println("link label: ");
+				String llbl = input.next();
+
+				System.out.println("next node label: ");
+				String nlbl = input.next();
+				try {
+					Node nxt = (Node) Node.findNodesByLabel(nlbl).get(0);
+
+					n.link( nxt, llbl, Link.ATOB);
+				} catch (Exception e) {
+					System.out.println("ce noeud n'existe pas");
+				}
+			}
+		} while ( choix.equals("y") );
+
+		
+	}
+
 	public BusNet() {
 	}
 
@@ -224,7 +277,4 @@ public class BusNet extends Thread {
 		menu();
 	}
 }
-
-
-
 
