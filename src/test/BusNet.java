@@ -75,15 +75,18 @@ public class BusNet extends Thread {
 		Node transport = (Node)Node.create("Transport").addProperty("x", "20").addProperty("y", "20"),
 			 bus = (Node)Node.create("Bus").addProperty("x", "20").addProperty("y", "120"),
 			 ligne = (Node)Node.create("Ligne").addProperty("x", "120").addProperty("y", "120"),
+			 marque  = (Node)Node.create("Brand").addProperty("x", "100").addProperty("y", "400"),
 			 arret = (Node)Node.create("Arret").addProperty("x", "450").addProperty("y", "200");
 
 		// Instances
-		Node b1 = (Node)Node.create("B1").addProperty("x", "50").addProperty("y", "220"),
-			 b2 = (Node)Node.create("B2").addProperty("x", "50").addProperty("y", "300"),
+		Node b1 = (Node)Node.create("B1").addProperty("x", "50").addProperty("y", "220").addProperty("capacite", "50"),
+			 b2 = (Node)Node.create("B2").addProperty("x", "50").addProperty("y", "300").addProperty("capacite", "100"),
 			 a = (Node)Node.create("A").addProperty("x", "230").addProperty("y", "60"),
 			 d = (Node)Node.create("D").addProperty("x", "230").addProperty("y", "120"),
 			 b = (Node)Node.create("B").addProperty("x", "230").addProperty("y", "180"),
 			 c = (Node)Node.create("C").addProperty("x", "230").addProperty("y", "240"),
+			 synchro = (Node)Node.create("Synchro").addProperty("x", "170").addProperty("y", "265"),
+			 mercedez = (Node)Node.create("Mercedez").addProperty("x", "170").addProperty("y", "330"),
 			 bourget = (Node)Node.create("Bourget").addProperty("x", "340").addProperty("y", "60"),
 			 halles = (Node)Node.create("Halles").addProperty("x", "340").addProperty("y", "120"),
 			 merrande = (Node)Node.create("Merrande").addProperty("x", "340").addProperty("y", "180"),
@@ -100,6 +103,8 @@ public class BusNet extends Thread {
 		d.link(ligne, "Instance", Link.ATOB);
 		b.link(ligne, "Instance", Link.ATOB);
 		c.link(ligne, "Instance", Link.ATOB);
+		mercedez.link(marque, "Instance", Link.ATOB);
+		synchro.link(marque, "Instance", Link.ATOB);
 		bourget.link(arret, "Instance", Link.ATOB);
 		halles.link(arret, "Instance", Link.ATOB);
 		merrande.link(arret, "Instance", Link.ATOB);
@@ -109,6 +114,8 @@ public class BusNet extends Thread {
 		// Others
 		b1.link(a, "Parcourt", Link.ATOB);
 		b2.link(d, "Parcourt", Link.ATOB);
+		b1.link(synchro, "ConcuPar", Link.ATOB);
+		b2.link(mercedez, "ConcuPar", Link.ATOB);
 		a.link(bourget, "Contient", Link.ATOB);
 		a.link(halles, "Contient", Link.ATOB);
 		d.link(halles, "Contient", Link.ATOB);

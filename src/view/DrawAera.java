@@ -62,7 +62,6 @@ public class DrawAera extends Canvas implements Observer {
 
 	public void init() {
 
-		System.out.println("INIT");
 		int x = 10, y = 500;
 		double a = 0, length = 100;
 
