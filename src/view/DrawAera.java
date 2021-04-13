@@ -32,11 +32,8 @@ public class DrawAera extends Canvas implements Observer {
 	}
 
 	public void paint(Graphics g){
-		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setStroke(new BasicStroke(3));
-
-		g.clearRect( 0, 0, 500, 500);
 
 		g2.setColor( Palette.green );
 		for( Shape l: lines )
@@ -47,8 +44,7 @@ public class DrawAera extends Canvas implements Observer {
 			g2.setColor( Palette.red );
 
 			if( nodes.get(i).getProperty("color").equals("black") ) {
-				System.out.println("TEST");
-				g2.setColor( Palette.black );
+				g2.setColor( Color.black );
 			}
 
 			g2.fill( c );
@@ -61,11 +57,11 @@ public class DrawAera extends Canvas implements Observer {
 
 	public void update(Observable obs, Object obj){
 		updates++;
-
 		this.repaint();
 	}
 
 	public void init() {
+
 		System.out.println("INIT");
 		int x = 10, y = 500;
 		double a = 0, length = 100;
