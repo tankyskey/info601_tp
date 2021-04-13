@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Observer;
-import java.util.Observable;
 
 public class Node extends Element {
     private static ArrayList<Node> instances = new ArrayList<Node>();

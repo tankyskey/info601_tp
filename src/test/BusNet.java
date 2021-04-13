@@ -48,7 +48,10 @@ public class BusNet extends Thread {
 			ligneTaken.add( l );
 
 			// si la ligne contient l'arret, arrete tout
-			if( l.isLinkedToBy(dst, "Contient") ) return true;
+			if( l.isLinkedToBy(dst, "Contient") ) {
+				ligneTaken.add( dst );
+				return true;
+			}
 
 			// sinon pour chaque ligne,
 			for( Node stops: l.getNexts("Contient") ) {
@@ -193,8 +196,10 @@ public class BusNet extends Thread {
 
 			ArrayList<Node> correspondance = new ArrayList<Node>();
 			if( goAtoB(arret, arret_dst, correspondance) ) {
-				for( Node c: correspondance )
+				for( Node c: correspondance ) {
+					c.setProperty("color", "black");
 					System.out.println( c );
+				}
 			} else {
 				System.out.println("pas de correspondance trouve");
 			}
@@ -212,5 +217,6 @@ public class BusNet extends Thread {
 		menu();
 	}
 }
+
 
 

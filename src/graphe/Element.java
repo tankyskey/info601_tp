@@ -2,8 +2,10 @@ package graphe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observer;
+import java.util.Observable;
 
-public class Element {
+public class Element extends Observable {
     private static ArrayList<Element> instances = new ArrayList<Element>();
     private static int nbInstances = 0;
 
@@ -25,6 +27,13 @@ public class Element {
         this.label = label;
     }
 
+	public Element setProperty(String key, String value) {
+		this.properties.replace(key, value);
+		setChanged();
+		notifyObservers();
+		return this;
+	}
+	
 	// ====== GETR ======
     public int getId() {
         return id;
